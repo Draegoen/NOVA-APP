@@ -11,14 +11,25 @@ const FISH_API_KEY = process.env.FISH_API_KEY;
 const NOVA_VOICE_ID = '499da4063f3640729a23bdc545e24e3f';
 
 const voiceProfiles = {
-  nova:       { pitchShift: 1.0, tempo: 1.0, lang: 'en-uk', fish: true },
-  french:     { pitchShift: 1.0, tempo: 0.99, lang: 'fr' },
-  spanish:    { pitchShift: 1.0, tempo: 1.1,  lang: 'es-us' },
-  german:     { pitchShift: 1.0, tempo: 1.1,  lang: 'de' },
-  japanese:   { pitchShift: 1.0, tempo: 1.1,  lang: 'ja' },
-  italian:    { pitchShift: 1.0, tempo: 0.92, lang: 'it' },
-  australian: { pitchShift: 1.0, tempo: 1.1,  lang: 'en-au' },
-  arabic:     { pitchShift: 1.0, tempo: 1.0,  lang: 'ar' },
+  nova:       { fish: true,  lang: 'en-uk', pitchShift: 1.0, tempo: 1.0 },
+  french:     { fish: false, lang: 'fr',    pitchShift: 1.0, tempo: 0.99 },
+  spanish:    { fish: false, lang: 'es-us', pitchShift: 1.0, tempo: 1.1  },
+  german:     { fish: false, lang: 'de',    pitchShift: 1.0, tempo: 1.1  },
+  japanese:   { fish: false, lang: 'ja',    pitchShift: 1.0, tempo: 1.1  },
+  italian:    { fish: false, lang: 'it',    pitchShift: 1.0, tempo: 0.92 },
+  australian: { fish: false, lang: 'en-au', pitchShift: 1.0, tempo: 1.1  },
+  arabic:     { fish: false, lang: 'ar',    pitchShift: 1.0, tempo: 1.0  },
+  chinese:    { fish: false, lang: 'zh-cn', pitchShift: 1.0, tempo: 1.0  },
+  finnish:    { fish: false, lang: 'fi',    pitchShift: 1.0, tempo: 1.0  },
+  hindi:      { fish: false, lang: 'hi',    pitchShift: 1.0, tempo: 1.0  },
+  indonesian: { fish: false, lang: 'id',    pitchShift: 1.0, tempo: 1.0  },
+  korean:     { fish: false, lang: 'ko',    pitchShift: 1.0, tempo: 1.0  },
+  latin:      { fish: false, lang: 'la',    pitchShift: 1.0, tempo: 1.0  },
+  portuguese: { fish: false, lang: 'pt',    pitchShift: 1.0, tempo: 1.0  },
+  romanian:   { fish: false, lang: 'ro',    pitchShift: 1.0, tempo: 1.0  },
+  russian:    { fish: false, lang: 'ru',    pitchShift: 1.0, tempo: 1.0  },
+  swedish:    { fish: false, lang: 'sv',    pitchShift: 1.0, tempo: 1.0  },
+  turkish:    { fish: false, lang: 'tr',    pitchShift: 1.0, tempo: 1.0  },
 };
 
 const emojiRegex = /(<a?:\w+:\d+>)|([\u2700-\u27BF]|[\uE000-\uF8FF]|[\uD83C-\uDBFF\uDC00-\uDFFF])/g;
@@ -38,7 +49,6 @@ async function fishTTS(text) {
       normalize: true,
     }),
   });
-
   if (!response.ok) throw new Error(await response.text());
   const buffer = await response.arrayBuffer();
   return Buffer.from(buffer).toString('base64');
@@ -83,20 +93,16 @@ app.post('/tts', async (req, res) => {
   if (token !== AUTH_TOKEN) return res.status(401).json({ error: 'Unauthorized' });
   if (!text) return res.status(400).json({ error: 'No text provided' });
 
-  const voiceProfile = voiceProfiles[profile] || voiceProfiles['nova'];
+  const vp = voiceProfiles[profile] || voiceProfiles['nova'];
 
   try {
     let base64;
-
-    if (voiceProfile.fish) {
-      // Nova voice — use Fish.audio clone
+    if (vp.fish) {
       base64 = await fishTTS(text);
     } else {
-      // All other profiles — use gTTS + FFmpeg
-      const ttsLang = lang || voiceProfile.lang || 'en';
-      base64 = await gttsTTS(text, ttsLang, voiceProfile.pitchShift, voiceProfile.tempo);
+      const ttsLang = lang || vp.lang || 'en';
+      base64 = await gttsTTS(text, ttsLang, vp.pitchShift, vp.tempo);
     }
-
     res.json({ audio: base64, mimeType: 'audio/mpeg' });
   } catch (err) {
     console.error('TTS error:', err);
