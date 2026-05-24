@@ -81,13 +81,13 @@ function gttsTTS(text, lang, pitchShift, tempo) {
 
       let ffmpegCmd;
       if (pitchShift !== 1.0 && tempo !== 1.0) {
-        ffmpegCmd = `ffmpeg -y -i "${rawPath}" -filter:a "asetrate=44100*${pitchShift},atempo=${tempo}" "${finalPath}"`;
+        ffmpegCmd = `ffmpeg -y -i "${rawPath}" -filter:a "asetrate=44100*${pitchShift},atempo=${tempo},loudnorm=I=-16:TP=-1.5:LRA=11" -ar 44100 "${finalPath}"`;
       } else if (pitchShift !== 1.0) {
-        ffmpegCmd = `ffmpeg -y -i "${rawPath}" -filter:a "asetrate=44100*${pitchShift}" "${finalPath}"`;
+        ffmpegCmd = `ffmpeg -y -i "${rawPath}" -filter:a "asetrate=44100*${pitchShift},loudnorm=I=-16:TP=-1.5:LRA=11" -ar 44100 "${finalPath}"`;
       } else if (tempo !== 1.0) {
-        ffmpegCmd = `ffmpeg -y -i "${rawPath}" -filter:a "atempo=${tempo}" "${finalPath}"`;
+        ffmpegCmd = `ffmpeg -y -i "${rawPath}" -filter:a "atempo=${tempo},loudnorm=I=-16:TP=-1.5:LRA=11" -ar 44100 "${finalPath}"`;
       } else {
-        ffmpegCmd = `ffmpeg -y -i "${rawPath}" "${finalPath}"`;
+        ffmpegCmd = `ffmpeg -y -i "${rawPath}" -filter:a "loudnorm=I=-16:TP=-1.5:LRA=11" -ar 44100 "${finalPath}"`;
       }
 
       exec(ffmpegCmd, (err) => {
