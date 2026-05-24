@@ -19,7 +19,6 @@ const voiceProfiles = {
   german:     { fish: false, lang: 'de',    tld: 'com',   pitchShift: 1.0,  tempo: 1.1  },
   japanese:   { fish: false, lang: 'ja',    tld: 'com',   pitchShift: 1.0,  tempo: 1.1  },
   italian:    { fish: false, lang: 'it',    tld: 'com',   pitchShift: 1.0,  tempo: 0.92 },
-  australian: { fish: false, lang: 'en',    tld: 'com.au',pitchShift: 1.0,  tempo: 1.1  },
   arabic:     { fish: false, lang: 'ar',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
   chinese:    { fish: false, lang: 'zh-CN', tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
   finnish:    { fish: false, lang: 'fi',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
