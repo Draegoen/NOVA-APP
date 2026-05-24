@@ -33,6 +33,21 @@ const voiceProfiles = {
   swedish:    { fish: false, lang: 'sv',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
   turkish:    { fish: false, lang: 'tr',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
   translator: { fish: false, lang: 'en',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
+  dutch:      { fish: false, lang: 'nl',    tld: 'nl',    pitchShift: 1.0, tempo: 1.0 },
+  norwegian:  { fish: false, lang: 'no',    tld: 'no',    pitchShift: 1.0, tempo: 1.0 },
+  danish:     { fish: false, lang: 'da',    tld: 'dk',    pitchShift: 1.0, tempo: 1.0 },
+  greek:      { fish: false, lang: 'el',    tld: 'gr',    pitchShift: 1.0, tempo: 1.0 },
+  polish:     { fish: false, lang: 'pl',    tld: 'pl',    pitchShift: 1.0, tempo: 1.0 },
+  vietnamese: { fish: false, lang: 'vi',    tld: 'com',   pitchShift: 1.0, tempo: 1.0 },
+  ukrainian:  { fish: false, lang: 'uk',    tld: 'com',   pitchShift: 1.0, tempo: 1.0 },
+  thai:       { fish: false, lang: 'th',    tld: 'co.th', pitchShift: 1.0, tempo: 1.0 },
+  malay:      { fish: false, lang: 'ms',    tld: 'com',   pitchShift: 1.0, tempo: 1.0 },
+  czech:      { fish: false, lang: 'cs',    tld: 'cz',    pitchShift: 1.0, tempo: 1.0 },
+  hungarian:  { fish: false, lang: 'hu',    tld: 'com',   pitchShift: 1.0, tempo: 1.0 },
+  bulgarian:  { fish: false, lang: 'bg',    tld: 'com',   pitchShift: 1.0, tempo: 1.0 },
+  croatian:   { fish: false, lang: 'hr',    tld: 'hr',    pitchShift: 1.0, tempo: 1.0 },
+  hebrew:     { fish: false, lang: 'iw',    tld: 'co.il', pitchShift: 1.0, tempo: 1.0 },
+  catalan:    { fish: false, lang: 'ca',    tld: 'com',   pitchShift: 1.0, tempo: 1.0 },
 };
 
 const emojiRegex = /(<a?:\w+:\d+>)|([\u2700-\u27BF]|[\uE000-\uF8FF]|[\uD83C-\uDBFF\uDC00-\uDFFF])/g;
