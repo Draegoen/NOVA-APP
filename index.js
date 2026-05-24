@@ -12,6 +12,7 @@ const NOVA_VOICE_ID = '499da4063f3640729a23bdc545e24e3f';
 
 const voiceProfiles = {
   nova:       { fish: true,  lang: 'en-uk', pitchShift: 1.0, tempo: 1.0 },
+  redqueen:   { fish: false, lang: 'en-uk', pitchShift: 0.64, tempo: 0.99 },
   english:    { fish: false, lang: 'en-us', pitchShift: 1.0, tempo: 1.0 },
   french:     { fish: false, lang: 'fr',    pitchShift: 1.0, tempo: 0.99 },
   spanish:    { fish: false, lang: 'es-us', pitchShift: 1.0, tempo: 1.1  },
@@ -35,6 +36,18 @@ const voiceProfiles = {
 
 const emojiRegex = /(<a?:\w+:\d+>)|([\u2700-\u27BF]|[\uE000-\uF8FF]|[\uD83C-\uDBFF\uDC00-\uDFFF])/g;
 
+// gTTS doesn't support BCP-47 variants — normalize to base codes
+const gttsLangMap = {
+  'en-uk': 'en', 'en-us': 'en', 'en-au': 'en',
+  'es-us': 'es', 'es-es': 'es',
+  'pt-br': 'pt',
+  'zh-cn': 'zh', 'zh-tw': 'zh',
+};
+
+function normalizeGttsLang(lang) {
+  return gttsLangMap[lang?.toLowerCase()] || lang || 'en';
+}
+
 async function fishTTS(text) {
   const response = await fetch('https://api.fish.audio/v1/tts', {
     method: 'POST',
@@ -43,7 +56,7 @@ async function fishTTS(text) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      text: text.slice(0, 300),
+      text: text.slice(0, 200),
       reference_id: NOVA_VOICE_ID,
       format: 'mp3',
       latency: 'normal',
@@ -101,7 +114,7 @@ app.post('/tts', async (req, res) => {
     if (vp.fish) {
       base64 = await fishTTS(text);
     } else {
-      const ttsLang = lang || vp.lang || 'en';
+      const ttsLang = normalizeGttsLang(lang || vp.lang || 'en');
       base64 = await gttsTTS(text, ttsLang, vp.pitchShift, vp.tempo);
     }
     res.json({ audio: base64, mimeType: 'audio/mpeg' });
