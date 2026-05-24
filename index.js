@@ -12,7 +12,7 @@ const NOVA_VOICE_ID = '499da4063f3640729a23bdc545e24e3f';
 
 const voiceProfiles = {
   nova:       { fish: true,  lang: 'en',    tld: 'co.uk', pitchShift: 1.0,  tempo: 1.0  },
-  redqueen:   { fish: false, lang: 'en',    tld: 'co.uk', pitchShift: 0.44, tempo: 0.95 },
+  redqueen:   { fish: false, lang: 'en',    tld: 'co.uk', pitchShift: 0.6, tempo: 0.9 },
   english:    { fish: false, lang: 'en',    tld: 'us',    pitchShift: 1.0,  tempo: 1.0  },
   french:     { fish: false, lang: 'fr',    tld: 'fr',    pitchShift: 1.0,  tempo: 0.99 },
   spanish:    { fish: false, lang: 'es',    tld: 'us',    pitchShift: 1.0,  tempo: 1.1  },
