@@ -51,11 +51,7 @@ const voiceProfiles = {
   slovak:         { fish: false, lang: 'sk',    tld: 'sk',    pitchShift: 1.0, tempo: 1.0 },
   welsh:          { fish: false, lang: 'cy',    tld: 'co.uk', pitchShift: 1.0, tempo: 1.0 },
   tamil:          { fish: false, lang: 'ta',    tld: 'co.in', pitchShift: 1.0, tempo: 1.0 },
-  gujarati:       { fish: false, lang: 'gu',    tld: 'co.in', pitchShift: 1.0, tempo: 1.0 },
-  punjabi:        { fish: false, lang: 'pa',    tld: 'co.in', pitchShift: 1.0, tempo: 1.0 },
-  nepali:         { fish: false, lang: 'ne',    tld: 'com',   pitchShift: 1.0, tempo: 1.0 },
   swahili:        { fish: false, lang: 'sw',    tld: 'com',   pitchShift: 1.0, tempo: 1.0 },
-  chinesetaiwan:  { fish: false, lang: 'zh-TW', tld: 'com',   pitchShift: 1.0, tempo: 1.0 },
 };
 
 const emojiRegex = /(<a?:\w+:\d+>)|([\u2700-\u27BF]|[\uE000-\uF8FF]|[\uD83C-\uDBFF\uDC00-\uDFFF])/g;
