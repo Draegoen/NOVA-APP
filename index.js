@@ -11,42 +11,31 @@ const FISH_API_KEY = process.env.FISH_API_KEY;
 const NOVA_VOICE_ID = '499da4063f3640729a23bdc545e24e3f';
 
 const voiceProfiles = {
-  nova:       { fish: true,  lang: 'en-uk', pitchShift: 1.0, tempo: 1.0 },
-  redqueen: { fish: false, lang: 'en-uk', pitchShift: 0.54, tempo: 0.95 },
-  english:    { fish: false, lang: 'en-us', pitchShift: 1.0, tempo: 1.0 },
-  french:     { fish: false, lang: 'fr',    pitchShift: 1.0, tempo: 0.99 },
-  spanish:    { fish: false, lang: 'es-us', pitchShift: 1.0, tempo: 1.1  },
-  german:     { fish: false, lang: 'de',    pitchShift: 1.0, tempo: 1.1  },
-  japanese:   { fish: false, lang: 'ja',    pitchShift: 1.0, tempo: 1.1  },
-  italian:    { fish: false, lang: 'it',    pitchShift: 1.0, tempo: 0.92 },
-  australian: { fish: false, lang: 'en-au', pitchShift: 1.0, tempo: 1.1  },
-  arabic:     { fish: false, lang: 'ar',    pitchShift: 1.0, tempo: 1.0  },
-  chinese:    { fish: false, lang: 'zh-cn', pitchShift: 1.0, tempo: 1.0  },
-  finnish:    { fish: false, lang: 'fi',    pitchShift: 1.0, tempo: 1.0  },
-  hindi:      { fish: false, lang: 'hi',    pitchShift: 1.0, tempo: 1.0  },
-  indonesian: { fish: false, lang: 'id',    pitchShift: 1.0, tempo: 1.0  },
-  korean:     { fish: false, lang: 'ko',    pitchShift: 1.0, tempo: 1.0  },
-  latin:      { fish: false, lang: 'la',    pitchShift: 1.0, tempo: 1.0  },
-  portuguese: { fish: false, lang: 'pt',    pitchShift: 1.0, tempo: 1.0  },
-  romanian:   { fish: false, lang: 'ro',    pitchShift: 1.0, tempo: 1.0  },
-  russian:    { fish: false, lang: 'ru',    pitchShift: 1.0, tempo: 1.0  },
-  swedish:    { fish: false, lang: 'sv',    pitchShift: 1.0, tempo: 1.0  },
-  turkish:    { fish: false, lang: 'tr',    pitchShift: 1.0, tempo: 1.0  },
+  nova:       { fish: true,  lang: 'en',    tld: 'co.uk', pitchShift: 1.0,  tempo: 1.0  },
+  redqueen:   { fish: false, lang: 'en',    tld: 'co.uk', pitchShift: 0.64, tempo: 0.99 },
+  english:    { fish: false, lang: 'en',    tld: 'us',    pitchShift: 1.0,  tempo: 1.0  },
+  french:     { fish: false, lang: 'fr',    tld: 'fr',    pitchShift: 1.0,  tempo: 0.99 },
+  spanish:    { fish: false, lang: 'es',    tld: 'us',    pitchShift: 1.0,  tempo: 1.1  },
+  german:     { fish: false, lang: 'de',    tld: 'com',   pitchShift: 1.0,  tempo: 1.1  },
+  japanese:   { fish: false, lang: 'ja',    tld: 'com',   pitchShift: 1.0,  tempo: 1.1  },
+  italian:    { fish: false, lang: 'it',    tld: 'com',   pitchShift: 1.0,  tempo: 0.92 },
+  australian: { fish: false, lang: 'en',    tld: 'com.au',pitchShift: 1.0,  tempo: 1.1  },
+  arabic:     { fish: false, lang: 'ar',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
+  chinese:    { fish: false, lang: 'zh-CN', tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
+  finnish:    { fish: false, lang: 'fi',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
+  hindi:      { fish: false, lang: 'hi',    tld: 'co.in', pitchShift: 1.0,  tempo: 1.0  },
+  indonesian: { fish: false, lang: 'id',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
+  korean:     { fish: false, lang: 'ko',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
+  latin:      { fish: false, lang: 'la',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
+  portuguese: { fish: false, lang: 'pt',    tld: 'pt',    pitchShift: 1.0,  tempo: 1.0  },
+  romanian:   { fish: false, lang: 'ro',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
+  russian:    { fish: false, lang: 'ru',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
+  swedish:    { fish: false, lang: 'sv',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
+  turkish:    { fish: false, lang: 'tr',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
+  translator: { fish: false, lang: 'en',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
 };
 
 const emojiRegex = /(<a?:\w+:\d+>)|([\u2700-\u27BF]|[\uE000-\uF8FF]|[\uD83C-\uDBFF\uDC00-\uDFFF])/g;
-
-// gTTS doesn't support BCP-47 variants — normalize to base codes
-const gttsLangMap = {
-  'en-uk': 'en', 'en-us': 'en', 'en-au': 'en',
-  'es-us': 'es', 'es-es': 'es',
-  'pt-br': 'pt',
-  'zh-cn': 'zh', 'zh-tw': 'zh',
-};
-
-function normalizeGttsLang(lang) {
-  return gttsLangMap[lang?.toLowerCase()] || lang || 'en';
-}
 
 async function fishTTS(text) {
   const response = await fetch('https://api.fish.audio/v1/tts', {
@@ -68,14 +57,14 @@ async function fishTTS(text) {
   return Buffer.from(buffer).toString('base64');
 }
 
-function gttsTTS(text, lang, pitchShift, tempo) {
+function gttsTTS(text, lang, tld, pitchShift, tempo) {
   return new Promise((resolve, reject) => {
     const id = Date.now();
     const rawPath = `/tmp/tts-raw-${id}.mp3`;
     const finalPath = `/tmp/tts-final-${id}.mp3`;
     const cleanText = text.slice(0, 300).replace(emojiRegex, '').trim();
 
-    const gtts = new gTTS(cleanText, lang);
+    const gtts = new gTTS(cleanText, lang, false, tld);
     gtts.save(rawPath, (err) => {
       if (err) return reject(err);
 
@@ -114,8 +103,9 @@ app.post('/tts', async (req, res) => {
     if (vp.fish) {
       base64 = await fishTTS(text);
     } else {
-      const ttsLang = normalizeGttsLang(lang || vp.lang || 'en');
-      base64 = await gttsTTS(text, ttsLang, vp.pitchShift, vp.tempo);
+      const ttsLang = vp.lang || 'en';
+      const ttsTld = vp.tld || 'com';
+      base64 = await gttsTTS(text, ttsLang, ttsTld, vp.pitchShift, vp.tempo);
     }
     res.json({ audio: base64, mimeType: 'audio/mpeg' });
   } catch (err) {
