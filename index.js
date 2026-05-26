@@ -56,10 +56,26 @@ const voiceProfiles = {
 // Centralized text cleaner — strips emojis, Discord formatting, extra whitespace
 const emojiRegex = /(<a?:\w+:\d+>)|([\u2700-\u27BF]|[\uE000-\uF8FF]|[\uD83C-\uDBFF\uDC00-\uDFFF])/g;
 
+// More comprehensive emoji and special character cleaner
 function cleanText(text, maxLength = 300) {
   return text
     .slice(0, maxLength)
-    .replace(emojiRegex, '')
+    // Discord custom emoji
+    .replace(/<a?:\w+:\d+>/g, '')
+    // ZWJ sequences (like 🦸‍♂️) — must come before other emoji replacements
+    .replace(/[\u{1F000}-\u{1FFFF}](\u200D[\u{1F000}-\u{1FFFF}][\uFE0F]?)*/gu, '')
+    // Standard emoji ranges
+    .replace(/[\u{2600}-\u{27BF}]/gu, '')
+    .replace(/[\u{1F300}-\u{1F9FF}]/gu, '')
+    .replace(/[\u{1FA00}-\u{1FA9F}]/gu, '')
+    // Variation selectors (️ modifier)
+    .replace(/[\uFE00-\uFE0F]/g, '')
+    // Zero width joiners and non-breaking spaces
+    .replace(/[\u200B-\u200D\uFEFF]/g, '')
+    // Private use area
+    .replace(/[\uE000-\uF8FF]/g, '')
+    // Clean up leftover punctuation artifacts and extra spaces
+    .replace(/([!?—,.])\s*([!?—,.])+/g, '$1')
     .replace(/\s+/g, ' ')
     .trim();
 }
