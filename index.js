@@ -12,7 +12,7 @@ const NOVA_VOICE_ID = '499da4063f3640729a23bdc545e24e3f';
 
 const voiceProfiles = {
   nova:       { fish: true,  lang: 'en',    tld: 'co.uk', pitchShift: 1.0,  tempo: 1.0  },
-  redqueen:   { fish: false, lang: 'en',    tld: 'co.uk', pitchShift: 0.61, tempo: 0.9 },
+  redqueen:   { fish: false, lang: 'en',    tld: 'co.uk', pitchShift: 0.61, tempo: 0.9  },
   english:    { fish: false, lang: 'en',    tld: 'us',    pitchShift: 1.0,  tempo: 1.0  },
   french:     { fish: false, lang: 'fr',    tld: 'fr',    pitchShift: 1.0,  tempo: 0.99 },
   spanish:    { fish: false, lang: 'es',    tld: 'us',    pitchShift: 1.0,  tempo: 1.1  },
@@ -32,28 +32,37 @@ const voiceProfiles = {
   swedish:    { fish: false, lang: 'sv',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
   turkish:    { fish: false, lang: 'tr',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
   translator: { fish: false, lang: 'en',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
-  dutch:      { fish: false, lang: 'nl',    tld: 'nl',    pitchShift: 1.0, tempo: 1.0 },
-  norwegian:  { fish: false, lang: 'no',    tld: 'no',    pitchShift: 1.0, tempo: 1.0 },
-  danish:     { fish: false, lang: 'da',    tld: 'dk',    pitchShift: 1.0, tempo: 1.0 },
-  greek:      { fish: false, lang: 'el',    tld: 'gr',    pitchShift: 1.0, tempo: 1.0 },
-  polish:     { fish: false, lang: 'pl',    tld: 'pl',    pitchShift: 1.0, tempo: 1.0 },
-  vietnamese: { fish: false, lang: 'vi',    tld: 'com',   pitchShift: 1.0, tempo: 1.0 },
-  thai:       { fish: false, lang: 'th',    tld: 'co.th', pitchShift: 1.0, tempo: 1.0 },
-  czech:      { fish: false, lang: 'cs',    tld: 'cz',    pitchShift: 1.0, tempo: 1.0 },
-  hungarian:  { fish: false, lang: 'hu',    tld: 'com',   pitchShift: 1.0, tempo: 1.0 },
-  croatian:   { fish: false, lang: 'hr',    tld: 'hr',    pitchShift: 1.0, tempo: 1.0 },
-  catalan:    { fish: false, lang: 'ca',    tld: 'com',   pitchShift: 1.0, tempo: 1.0 },
-  icelandic:      { fish: false, lang: 'is',    tld: 'is',    pitchShift: 1.0, tempo: 1.0 },
-  latvian:        { fish: false, lang: 'lv',    tld: 'lv',    pitchShift: 1.0, tempo: 1.0 },
-  albanian:       { fish: false, lang: 'sq',    tld: 'com',   pitchShift: 1.0, tempo: 1.0 },
-  serbian:        { fish: false, lang: 'sr',    tld: 'com',   pitchShift: 1.0, tempo: 1.0 },
-  slovak:         { fish: false, lang: 'sk',    tld: 'sk',    pitchShift: 1.0, tempo: 1.0 },
-  welsh:          { fish: false, lang: 'cy',    tld: 'co.uk', pitchShift: 1.0, tempo: 1.0 },
-  tamil:          { fish: false, lang: 'ta',    tld: 'co.in', pitchShift: 1.0, tempo: 1.0 },
-  swahili:        { fish: false, lang: 'sw',    tld: 'com',   pitchShift: 1.0, tempo: 1.0 },
+  dutch:      { fish: false, lang: 'nl',    tld: 'nl',    pitchShift: 1.0,  tempo: 1.0  },
+  norwegian:  { fish: false, lang: 'no',    tld: 'no',    pitchShift: 1.0,  tempo: 1.0  },
+  danish:     { fish: false, lang: 'da',    tld: 'dk',    pitchShift: 1.0,  tempo: 1.0  },
+  greek:      { fish: false, lang: 'el',    tld: 'gr',    pitchShift: 1.0,  tempo: 1.0  },
+  polish:     { fish: false, lang: 'pl',    tld: 'pl',    pitchShift: 1.0,  tempo: 1.0  },
+  vietnamese: { fish: false, lang: 'vi',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
+  thai:       { fish: false, lang: 'th',    tld: 'co.th', pitchShift: 1.0,  tempo: 1.0  },
+  czech:      { fish: false, lang: 'cs',    tld: 'cz',    pitchShift: 1.0,  tempo: 1.0  },
+  hungarian:  { fish: false, lang: 'hu',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
+  croatian:   { fish: false, lang: 'hr',    tld: 'hr',    pitchShift: 1.0,  tempo: 1.0  },
+  catalan:    { fish: false, lang: 'ca',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
+  icelandic:  { fish: false, lang: 'is',    tld: 'is',    pitchShift: 1.0,  tempo: 1.0  },
+  latvian:    { fish: false, lang: 'lv',    tld: 'lv',    pitchShift: 1.0,  tempo: 1.0  },
+  albanian:   { fish: false, lang: 'sq',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
+  serbian:    { fish: false, lang: 'sr',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
+  slovak:     { fish: false, lang: 'sk',    tld: 'sk',    pitchShift: 1.0,  tempo: 1.0  },
+  welsh:      { fish: false, lang: 'cy',    tld: 'co.uk', pitchShift: 1.0,  tempo: 1.0  },
+  tamil:      { fish: false, lang: 'ta',    tld: 'co.in', pitchShift: 1.0,  tempo: 1.0  },
+  swahili:    { fish: false, lang: 'sw',    tld: 'com',   pitchShift: 1.0,  tempo: 1.0  },
 };
 
+// Centralized text cleaner — strips emojis, Discord formatting, extra whitespace
 const emojiRegex = /(<a?:\w+:\d+>)|([\u2700-\u27BF]|[\uE000-\uF8FF]|[\uD83C-\uDBFF\uDC00-\uDFFF])/g;
+
+function cleanText(text, maxLength = 300) {
+  return text
+    .slice(0, maxLength)
+    .replace(emojiRegex, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 
 async function fishTTS(text) {
   const response = await fetch('https://api.fish.audio/v1/tts', {
@@ -63,7 +72,7 @@ async function fishTTS(text) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      text: text.slice(0, 200),
+      text,
       reference_id: NOVA_VOICE_ID,
       format: 'mp3',
       latency: 'normal',
@@ -80,9 +89,8 @@ function gttsTTS(text, lang, tld, pitchShift, tempo) {
     const id = Date.now();
     const rawPath = `/tmp/tts-raw-${id}.mp3`;
     const finalPath = `/tmp/tts-final-${id}.mp3`;
-    const cleanText = text.slice(0, 300).replace(emojiRegex, '').trim();
 
-    const gtts = new gTTS(cleanText, lang, false, tld);
+    const gtts = new gTTS(text, lang, false, tld);
     gtts.save(rawPath, (err) => {
       if (err) return reject(err);
 
@@ -114,16 +122,21 @@ app.post('/tts', async (req, res) => {
   if (token !== AUTH_TOKEN) return res.status(401).json({ error: 'Unauthorized' });
   if (!text) return res.status(400).json({ error: 'No text provided' });
 
+  // Clean emojis and formatting centrally — applies to ALL profiles before processing
+  const maxLen = profile === 'nova' ? 200 : 300;
+  const cleaned = cleanText(text, maxLen);
+  if (!cleaned) return res.status(400).json({ error: 'No speakable text after cleaning' });
+
   const vp = voiceProfiles[profile] || voiceProfiles['nova'];
 
   try {
     let base64;
     if (vp.fish) {
-      base64 = await fishTTS(text);
+      base64 = await fishTTS(cleaned);
     } else {
       const ttsLang = vp.lang || 'en';
       const ttsTld = vp.tld || 'com';
-      base64 = await gttsTTS(text, ttsLang, ttsTld, vp.pitchShift, vp.tempo);
+      base64 = await gttsTTS(cleaned, ttsLang, ttsTld, vp.pitchShift, vp.tempo);
     }
     res.json({ audio: base64, mimeType: 'audio/mpeg' });
   } catch (err) {
